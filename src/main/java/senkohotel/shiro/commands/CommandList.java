@@ -1,9 +1,8 @@
-package senkohotel.hotelbot.commands;
+package senkohotel.shiro.commands;
 
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import senkohotel.hotelbot.Main;
+import senkohotel.shiro.Main;
 
-import java.util.Arrays;
 import java.util.TreeMap;
 
 public class CommandList {
@@ -21,10 +20,9 @@ public class CommandList {
             exec(msg, args);
     }
 
-    static void exec(MessageReceivedEvent msg, String[] split) {
-        if (commands.containsKey(split[0])) {
-            String[] args = Arrays.copyOfRange(split, 1, split.length);
-            commands.get(split[0]).exec(msg, args);
+    static void exec (MessageReceivedEvent msg, String[] args) {
+        if (commands.containsKey(args[0])) {
+            commands.get(args[0]).exec(msg, args);
         }
     }
 }

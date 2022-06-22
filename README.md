@@ -1,2 +1,2 @@
-# HotelBot
-The base template for all Hotel bots
+# Shiro (or Maid Shiro)
+Welcomes the new Hotel visitors
