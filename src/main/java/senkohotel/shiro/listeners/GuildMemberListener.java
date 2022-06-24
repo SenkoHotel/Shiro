@@ -2,12 +2,18 @@ package senkohotel.shiro.listeners;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.MessageBuilder;
+import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
+import net.dv8tion.jda.api.events.guild.member.GuildMemberRemoveEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 import senkohotel.shiro.utils.MessageUtils;
 
+import java.util.HashMap;
+
 public class GuildMemberListener extends ListenerAdapter {
+    HashMap<String, Message> joins = new HashMap<>();
+
     @Override
     public void onGuildMemberJoin(@NotNull GuildMemberJoinEvent event) {
         if (event.getGuild().getId().equals("791993321374613514")) {
@@ -26,7 +32,27 @@ public class GuildMemberListener extends ListenerAdapter {
                                     .build()
                     );
 
-            MessageUtils.send("843139330016935947", message);
+            Message joinmessage = MessageUtils.send("843139330016935947", message);
+            joins.put(event.getMember().getId(), joinmessage);
+        }
+    }
+
+    @Override
+    public void onGuildMemberRemove(@NotNull GuildMemberRemoveEvent event) {
+        if (event.getGuild().getId().equals("791993321374613514")) {
+            if (joins.containsKey(event.getUser().getId())) {
+                MessageBuilder message = new MessageBuilder()
+                        .setContent("<@&806036007858208775>")
+                        .setEmbeds(
+                                new EmbedBuilder()
+                                        .setTitle(event.getUser().getName() + " just joi...")
+                                        .setDescription("Nevermind they left again ;-;")
+                                        .setColor(0xFF5555)
+                                        .build()
+                        );
+                joins.get(event.getUser().getId()).editMessage(message.build()).complete();
+                joins.remove(event.getUser().getId());
+            }
         }
     }
 }
