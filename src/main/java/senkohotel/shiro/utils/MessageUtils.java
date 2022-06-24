@@ -2,6 +2,7 @@ package senkohotel.shiro.utils;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.MessageBuilder;
+import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import senkohotel.shiro.Main;
 
@@ -27,15 +28,15 @@ public class MessageUtils {
                 .complete();
     }
 
-    public static void send(String channelID, String content) {
-        Main.bot.getTextChannelById(channelID).sendMessage(content).complete();
+    public static Message send(String channelID, String content) {
+        return Main.bot.getTextChannelById(channelID).sendMessage(content).complete();
     }
 
-    public static void send(String channelID, MessageBuilder message) {
-        Main.bot.getTextChannelById(channelID).sendMessage(message.build()).complete();
+    public static Message send(String channelID, MessageBuilder message) {
+        return Main.bot.getTextChannelById(channelID).sendMessage(message.build()).complete();
     }
 
-    public static void send(String channelID, EmbedBuilder embed) {
-        Main.bot.getTextChannelById(channelID).sendMessage(new MessageBuilder().setEmbeds(embed.build()).build()).complete();
+    public static Message send(String channelID, EmbedBuilder embed) {
+        return Main.bot.getTextChannelById(channelID).sendMessage(new MessageBuilder().setEmbeds(embed.build()).build()).complete();
     }
 }
