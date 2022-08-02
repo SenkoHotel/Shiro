@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'senkohotel.shiro'
-version '1.0.0'
+version ''
 
 repositories {
     mavenCentral()
