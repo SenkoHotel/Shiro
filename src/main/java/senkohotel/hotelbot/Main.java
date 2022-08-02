@@ -1,13 +1,15 @@
-package senkohotel.shiro;
+package senkohotel.hotelbot;
 
 import com.google.gson.JsonParser;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.requests.GatewayIntent;
-import senkohotel.shiro.commands.CommandList;
+import senkohotel.hotelbot.commands.CommandList;
 import senkohotel.shiro.listeners.GuildMemberListener;
-import senkohotel.shiro.listeners.MessageListener;
+import senkohotel.hotelbot.listeners.MessageListener;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.security.auth.login.LoginException;
 import java.nio.file.Files;
@@ -15,9 +17,10 @@ import java.nio.file.Path;
 import java.util.EnumSet;
 
 public class Main {
-    public static String prefix = "shiro ";
+    public static String[] prefix = {"shiro "};
     public static JDA bot;
     public static int accentColor = 0xf3ecf4;
+    public static Logger LOG = LoggerFactory.getLogger("hotelbot");
 
     public static void main(String[] args) throws LoginException {
         CommandList.initList();

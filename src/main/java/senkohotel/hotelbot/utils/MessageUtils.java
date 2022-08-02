@@ -1,10 +1,10 @@
-package senkohotel.shiro.utils;
+package senkohotel.hotelbot.utils;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.MessageBuilder;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import senkohotel.shiro.Main;
+import senkohotel.hotelbot.Main;
 
 public class MessageUtils {
     public static void reply(MessageReceivedEvent msg, String content) {
