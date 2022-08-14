@@ -25,9 +25,17 @@ public class HelpCommand extends Command {
                 .setColor(Main.accentColor)
                 .setDescription("A list off all commands i can use!");
 
+        boolean isEmpty = true;
         for (Map.Entry<String, Command> command : CommandList.getCommands().entrySet()) {
-            if (!command.getValue().hidden)
+            if (!command.getValue().hidden) {
+                isEmpty = false;
                 embed.addField(command.getKey(), command.getValue().desc, true);
+            }
+        }
+
+        if (isEmpty) {
+            embed.setDescription("A list off all comman...\nWait...\nThere's nothing here.");
+            embed.setImage("https://c.tenor.com/ZDIzN0XPt_oAAAAC/senkosan-senko.gif");
         }
 
         MessageUtils.reply(msg, embed);
