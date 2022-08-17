@@ -4,6 +4,7 @@ import net.dv8tion.jda.api.events.guild.GuildReadyEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
+import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData;
 import org.reflections.Reflections;
 import senkohotel.hotelbot.Main;
@@ -46,6 +47,7 @@ public class SlashCommandList {
 
         for (Map.Entry<String, SlashCommand> entry : commands.entrySet()) {
             SlashCommandData slashCommand = Commands.slash(entry.getKey(), entry.getValue().description);
+            slashCommand.addOptions(entry.getValue().options);
             slashCommands.add(slashCommand);
         }
 
