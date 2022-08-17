@@ -21,7 +21,7 @@ public class CommandList {
             try {
                 addCommand(cmd.getConstructor().newInstance());
             } catch (Exception e) {
-                System.out.println("Couldn't add command " + cmd.getName());
+                Main.LOG.error("Couldn't add command " + cmd.getName(), e);
                 e.printStackTrace();
             }
         }

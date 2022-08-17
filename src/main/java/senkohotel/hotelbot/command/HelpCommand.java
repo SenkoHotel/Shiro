@@ -21,7 +21,7 @@ public class HelpCommand extends Command {
         super.exec(msg, args);
 
         EmbedBuilder embed = new EmbedBuilder()
-                .setTitle(Main.bot.getSelfUser().getName() + " help page")
+                .setTitle(Main.bot.getSelfUser().getName() + " - Help")
                 .setColor(Main.accentColor)
                 .setDescription("A list off all commands i can use!");
 
