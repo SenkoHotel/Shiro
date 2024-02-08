@@ -9,6 +9,17 @@ namespace Shiro;
 
 public static class Program
 {
+    private static List<string> welcomeEmotes { get; } = new()
+    {
+        "792071753228353548",
+        "844802666503995392",
+        "852891485959356447",
+        "835934243011035157",
+        "792071751899021335",
+        "841889936785276988",
+        "818047092085227530"
+    };
+
     private static readonly Dictionary<ulong, DiscordMessage> joins = new();
 
     public static async Task Main()
@@ -16,9 +27,65 @@ public static class Program
         var config = HotelBot.LoadConfig<Config>();
         var bot = new HotelBot(config.Token);
 
+        bot.Client.MessageCreated += onMessage;
         bot.Client.GuildMemberAdded += memberJoin;
         bot.Client.GuildMemberRemoved += memberLeave;
         await bot.Start();
+    }
+
+    private static async Task onMessage(DiscordClient sender, MessageCreateEventArgs args)
+    {
+        var content = args.Message.Content.ToLower();
+
+        if (content.StartsWith("welcome"))
+        {
+            var picks = new List<string>();
+
+            for (var i = 0; i < 3; i++)
+            {
+                var rng = new Random();
+                var pick = welcomeEmotes[rng.Next(welcomeEmotes.Count)];
+
+                while (picks.Contains(pick))
+                    pick = welcomeEmotes[rng.Next(welcomeEmotes.Count)];
+
+                picks.Add(pick);
+            }
+
+            foreach (var pick in picks)
+            {
+                try
+                {
+                    var emote = await args.Guild.GetEmojiAsync(ulong.Parse(pick));
+
+                    if (emote is null)
+                        continue;
+
+                    await args.Message.CreateReactionAsync(emote);
+                }
+                catch
+                {
+                    // ignored
+                }
+            }
+        }
+
+        if (content.StartsWith("welcomen't") || content.StartsWith("welcoment"))
+        {
+            try
+            {
+                var emote = await args.Guild.GetEmojiAsync(810515319981867029);
+
+                if (emote is null)
+                    return;
+
+                await args.Message.CreateReactionAsync(emote);
+            }
+            catch
+            {
+                // ignored
+            }
+        }
     }
 
     private static async Task memberJoin(DiscordClient sender, GuildMemberAddEventArgs args)
