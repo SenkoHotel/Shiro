@@ -3,6 +3,7 @@ using DSharpPlus;
 using DSharpPlus.Entities;
 using DSharpPlus.EventArgs;
 using HotelLib;
+using HotelLib.Utils;
 
 namespace Shiro;
 
@@ -60,11 +61,16 @@ public static class Program
 
         if (joins.TryGetValue(member.Id, out var message))
         {
+            var joinDate = message.CreationTimestamp.ToUnixTimeSeconds();
+            var leaveDate = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+            var difference = leaveDate - joinDate;
+
             var builder = new DiscordMessageBuilder()
                           .WithContent("<@&806036007858208775>")
                           .WithEmbed(new DiscordEmbedBuilder()
                                      .WithTitle($"{member.Username} just joi...")
                                      .WithDescription("Nevermind they left again ;-;")
+                                     .WithFooter($"They were here for {TimeUtils.Format(difference)}")
                                      .WithColor(new DiscordColor(255, 85, 85))
                                      .Build());
 
