@@ -3,6 +3,7 @@ using DSharpPlus;
 using DSharpPlus.Entities;
 using DSharpPlus.EventArgs;
 using HotelLib;
+using HotelLib.Logging;
 using HotelLib.Utils;
 
 namespace Shiro;
@@ -63,9 +64,9 @@ public static class Program
 
                     await args.Message.CreateReactionAsync(emote);
                 }
-                catch
+                catch (Exception e)
                 {
-                    // ignored
+                    Logger.Log(e);
                 }
             }
         }
@@ -102,6 +103,7 @@ public static class Program
 
         var builder = new DiscordMessageBuilder()
                       .WithContent($"{member.Mention} <@&806036007858208775>")
+                      .WithAllowedMentions(Mentions.All)
                       .WithEmbed(new DiscordEmbedBuilder()
                                  .WithTitle($"Welcome {member.Username}!")
                                  .WithDescription(content.ToString())
@@ -134,6 +136,7 @@ public static class Program
 
             var builder = new DiscordMessageBuilder()
                           .WithContent("<@&806036007858208775>")
+                          .WithAllowedMentions(Mentions.All)
                           .WithEmbed(new DiscordEmbedBuilder()
                                      .WithTitle($"{member.Username} just joi...")
                                      .WithDescription("Nevermind they left again ;-;")
