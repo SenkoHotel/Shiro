@@ -107,7 +107,7 @@ public static class Program
                       .WithEmbed(new DiscordEmbedBuilder()
                                  .WithTitle($"Welcome {member.Username}!")
                                  .WithDescription(content.ToString())
-                                 .WithImageUrl("https://cdn.discordapp.com/attachments/964560961497358397/982309210995953704/unknown.png?size=4096")
+                                 .WithImageUrl("https://share.flux.moe/66d29dacbd5b27492ce4d5e9.png")
                                  .WithThumbnail(member.AvatarUrl)
                                  .WithColor(new DiscordColor(239, 182, 79))
                                  .Build());
