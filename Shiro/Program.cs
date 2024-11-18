@@ -41,6 +41,25 @@ public static class Program
     {
         var content = args.Message.Content.ToLower();
 
+        if (content.StartsWith("welcomen't") || content.StartsWith("welcoment"))
+        {
+            try
+            {
+                var emote = await args.Guild.GetEmojiAsync(810515319981867029);
+
+                if (emote is null)
+                    return;
+
+                await args.Message.CreateReactionAsync(emote);
+            }
+            catch
+            {
+                // ignored
+            }
+
+            return;
+        }
+
         if (content.StartsWith("welcome"))
         {
             var picks = new List<string>();
@@ -71,23 +90,6 @@ public static class Program
                 {
                     Logger.Log(e);
                 }
-            }
-        }
-
-        if (content.StartsWith("welcomen't") || content.StartsWith("welcoment"))
-        {
-            try
-            {
-                var emote = await args.Guild.GetEmojiAsync(810515319981867029);
-
-                if (emote is null)
-                    return;
-
-                await args.Message.CreateReactionAsync(emote);
-            }
-            catch
-            {
-                // ignored
             }
         }
     }
