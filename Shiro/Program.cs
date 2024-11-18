@@ -39,7 +39,12 @@ public static class Program
 
     private static async Task onMessage(DiscordClient sender, MessageCreateEventArgs args)
     {
-        var content = args.Message.Content.ToLower();
+        var content = args.Message.Content;
+
+        if (args.Message.Stickers.Any())
+            content += $" {args.Message.Stickers[0].Name}";
+
+        content = content.ToLower().Trim();
 
         if (content.StartsWith("welcomen't") || content.StartsWith("welcoment"))
         {
