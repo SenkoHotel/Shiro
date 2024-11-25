@@ -46,7 +46,7 @@ public static class Program
 
         content = content.ToLower().Trim();
 
-        if (content.StartsWith("welcomen't") || content.StartsWith("welcoment"))
+        if (content.StartsWith("welcomen't") || content.StartsWith("welcomen’t") || content.StartsWith("welcoment"))
         {
             try
             {
