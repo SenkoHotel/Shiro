@@ -25,8 +25,7 @@ public static class Program
 
     public static async Task Main()
     {
-        var config = HotelBot.LoadConfig<Config>();
-        var bot = new HotelBot(config.Token)
+        var bot = new HotelBot
         {
             AccentColor = new DiscordColor("#e5d5ce")
         };
